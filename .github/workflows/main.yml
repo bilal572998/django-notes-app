@@ -34,51 +34,18 @@ jobs:
       - name: Build and push Docker images
         run: |
           # Build the images using docker-compose
-<<<<<<< HEAD
-          #docker-compose -f mynotes/
-          #docker-compose -f ./
-=======
->>>>>>> fb5ef36 (replaced main.yml)
           docker-compose -f docker-compose.yml build
 
           # Tag the images for ACR
-          #docker tag  myacr5081850.azurecr.io/django_cont:latest
-          #docker tag nginx_cont myacr5081850.azurecr.io/nginx:latest
           docker tag django_app myacr5081850.azurecr.io/django_app:latest
           docker tag nginx myacr5081850.azurecr.io/nginx:latest
-          # Push the images to ACR
-          #docker push myacr5081850.azurecr.io/django_cont:latest
-          #docker push myacr5081850.azurecr.io/nginx_cont:latest
-           docker push myacr5081850.azurecr.io/django_app:latest
-           docker push myacr5081850.azurecr.io/nginx:latest
- name: Deploy to Azure
- on:
-  push:
-    branches:
-      - main
 
- jobs:
+          # Push the images to ACR
+          docker push myacr5081850.azurecr.io/django_app:latest
+          docker push myacr5081850.azurecr.io/nginx:latest
+
   deploy:
     runs-on: ubuntu-latest
-<<<<<<< HEAD
-
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
-
-    - name: Log in to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Deploy to Azure Container Apps
-      run: |
-        az containerapp update \
-          --name myContainerApp \
-          --resource-group myResourceGroup \
-          --image myacr5081850.azurecr.io/django_app:latest
-
-=======
     needs: build  # Ensure build job completes before deploying
 
     steps:
@@ -97,4 +64,3 @@ jobs:
             --resource-group myResourceGroup \
             --image myacr5081850.azurecr.io/django_app:latest
 
->>>>>>> fb5ef36 (replaced main.yml)
