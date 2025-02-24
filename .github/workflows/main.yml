@@ -13,8 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: List files in mynotes
-        run: ls -la ./  # List files in the mynotes directory
+      - name: List files in workspace
+        run: ls -la ./  # List all files in the workspace
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -34,8 +34,11 @@ jobs:
       - name: Build and push Docker images
         run: |
           # Build the images using docker-compose
+<<<<<<< HEAD
           #docker-compose -f mynotes/
           #docker-compose -f ./
+=======
+>>>>>>> fb5ef36 (replaced main.yml)
           docker-compose -f docker-compose.yml build
 
           # Tag the images for ACR
@@ -57,6 +60,7 @@ jobs:
  jobs:
   deploy:
     runs-on: ubuntu-latest
+<<<<<<< HEAD
 
     steps:
     - name: Checkout Code
@@ -74,3 +78,23 @@ jobs:
           --resource-group myResourceGroup \
           --image myacr5081850.azurecr.io/django_app:latest
 
+=======
+    needs: build  # Ensure build job completes before deploying
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Container Apps
+        run: |
+          az containerapp update \
+            --name myContainerApp \
+            --resource-group myResourceGroup \
+            --image myacr5081850.azurecr.io/django_app:latest
+
+>>>>>>> fb5ef36 (replaced main.yml)
