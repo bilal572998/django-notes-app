@@ -50,13 +50,12 @@ jobs:
            docker push myacr5081850.azurecr.io/nginx:latest
            
 name: Deploy to Azure
-
-on:
+ on:
   push:
     branches:
       - main
 
-jobs:
+ jobs:
   deploy:
     runs-on: ubuntu-latest
 
