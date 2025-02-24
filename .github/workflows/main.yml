@@ -49,7 +49,7 @@ jobs:
            docker push myacr5081850.azurecr.io/django_app:latest
            docker push myacr5081850.azurecr.io/nginx:latest
            
-name: Deploy to Azure
+ name: Deploy to Azure
  on:
   push:
     branches:
