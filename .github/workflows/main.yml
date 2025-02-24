@@ -38,12 +38,12 @@ jobs:
           docker-compose -f ./
 
           # Tag the images for ACR
-          docker tag django_app myacr5081850.azurecr.io/django_app:latest
-          docker tag nginx myacr5081850.azurecr.io/nginx:latest
+          docker tag  myacr5081850.azurecr.io/django_cont:latest
+          docker tag nginx_cont myacr5081850.azurecr.io/nginx:latest
 
           # Push the images to ACR
-          docker push myacr5081850.azurecr.io/django_app:latest
-          docker push myacr5081850.azurecr.io/nginx:latest
+          docker push myacr5081850.azurecr.io/django_cont:latest
+          docker push myacr5081850.azurecr.io/nginx_cont:latest
 
   deploy:
     runs-on: ubuntu-latest
